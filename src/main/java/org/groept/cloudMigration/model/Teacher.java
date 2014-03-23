@@ -1,4 +1,4 @@
-package org.fanjun.model;
+package org.groept.cloudMigration.model;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -57,7 +57,7 @@ public class Teacher {
 		this.age = age;
 	}
 
-	@Override
+	/*@Override
     public String toString() {
         return "Person{" +
                 "id='" + id + '\'' +
@@ -65,5 +65,5 @@ public class Teacher {
                 ", area='" + area + '\'' +
                 ", age='" + age + '\'' +
                 '}';
-    }
+    }*/
 }

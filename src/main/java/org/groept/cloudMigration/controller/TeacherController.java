@@ -1,10 +1,9 @@
-package org.fanjun.controller;
+package org.groept.cloudMigration.controller;
 
 
 
-import org.fanjun.dao.TeacherDao;
-import org.fanjun.model.Teacher;
-import org.fanjun.service.TeacherSevice;
+import org.groept.cloudMigration.model.Teacher;
+import org.groept.cloudMigration.service.TeacherSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
@@ -16,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.RedirectView;
-
 import java.util.List;
 import java.util.Locale;
 

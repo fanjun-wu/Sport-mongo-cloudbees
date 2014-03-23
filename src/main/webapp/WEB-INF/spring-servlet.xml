@@ -6,7 +6,9 @@
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	 xmlns:beans="http://www.springframework.org/schema/beans"
+	 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -16,65 +18,52 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/data/mongo
           http://www.springframework.org/schema/data/mongo/spring-mongo-1.1.xsd
+          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	
 	
 	<context:annotation-config />
-	<context:component-scan base-package="org.fanjun" />	
+	<context:component-scan base-package="org.groept.cloudMigration" />	
 		
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles/tiles-definitions.xml</value>
+			</list>
+		</property>
+	</bean>
 	
+	<mvc:annotation-driven />
+	
+	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 		p:location="/WEB-INF/jdbc.properties" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
-		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}" >
-	    <property name="validationQuery" value="SELECT 1"/>
-  <property name="testOnBorrow" value="true"/>
-	</bean>
 	
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation">
-			<value>classpath:hibernate.cfg.xml</value>
-		</property>
-		<property name="configurationClass">
-			<value>org.hibernate.cfg.AnnotationConfiguration</value>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				
-				
-			</props>
-		</property>
-	</bean>
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-	    <property name="prefix" value="/WEB-INF/jsp/"/>
+	    <property name="prefix" value="/WEB-INF/views/"/>
 	    <property name="suffix" value=".jsp"/>
 	</bean>
-	<tx:annotation-driven />
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>	
 	
+	<!-- for access control of admin -->
+	<import resource="spring-security.xml"/>
+
 	<!-- Default bean name is 'mongo' -->
-   <!--  <mongo:mongo id="mongo" host="localhost" port="27017"/>
+   <!-- <mongo:mongo id="mongo" host="localhost" port="27017"/>
 
     <beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <beans:constructor-arg ref="mongo"/>
-        <beans:constructor-arg name="databaseName" value="teac"/>
-    </beans:bean> -->
+        <beans:constructor-arg name="databaseName" value="t8"/>
+    </beans:bean>  -->
     
     <!-- Default bean name is 'mongo' -->
-<bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials">
+ <bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials">
     <constructor-arg name="username" value="cloudbees" />
     <constructor-arg name="password" value="faros" />
 </bean>
@@ -86,15 +75,10 @@
         <beans:constructor-arg name="databaseName" value="JrGJFMWlktbBDwPCzxSMQ"/>
         <beans:constructor-arg name="userCredentials" ref="mongoCredentials"/>
     </beans:bean> 
-    
-   <!--  <mongo:db-factory id="mongo"
-                  host="troup.mongohq.com"
-                  port="10081"
-                  dbname="JrGJFMWlktbBDwPCzxSMQ"
-                  username="cloudbees"
-                  password="8683de7027f647d652d42daf23d84362"/> -->
-    
- 
+     
+   
+   <!-- <mongo:repositories base-package="org.groept.cloudMigration.repository" /> -->
+ <!-- <mongo:repositories base-package="org.groept.cloudMigration.dao"></mongo:repositories> -->
 
-    <mongo:repositories base-package="org.fanjun.dao"/>
+     <mongo:repositories base-package="org.groept.cloudMigration.dao"/> 
 </beans>

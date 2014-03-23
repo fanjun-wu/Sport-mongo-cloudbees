@@ -1,9 +1,9 @@
-package org.fanjun.dao.impl;
+package org.groept.cloudMigration.dao.impl;
 
 import java.util.List;
 
-import org.fanjun.dao.TeacherDao;
-import org.fanjun.model.Teacher;
+import org.groept.cloudMigration.dao.TeacherDao;
+import org.groept.cloudMigration.model.Teacher;
 import org.springframework.stereotype.Repository;
 
 @Repository

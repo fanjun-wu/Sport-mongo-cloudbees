@@ -1,8 +1,8 @@
-package org.fanjun.dao;
+package org.groept.cloudMigration.dao;
 
 
 
-import org.fanjun.model.Teacher;
+import org.groept.cloudMigration.model.Teacher;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

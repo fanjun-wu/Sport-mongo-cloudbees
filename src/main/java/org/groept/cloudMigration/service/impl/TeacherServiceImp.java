@@ -1,10 +1,10 @@
-package org.fanjun.service.impl;
+package org.groept.cloudMigration.service.impl;
 
 import java.util.List;
 
-import org.fanjun.dao.TeacherDao;
-import org.fanjun.model.Teacher;
-import org.fanjun.service.TeacherSevice;
+import org.groept.cloudMigration.dao.TeacherDao;
+import org.groept.cloudMigration.model.Teacher;
+import org.groept.cloudMigration.service.TeacherSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

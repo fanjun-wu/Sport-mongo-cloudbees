@@ -1,11 +1,12 @@
-package org.fanjun.service;
+package org.groept.cloudMigration.service;
 
 import java.util.List;
 
 
 
 
-import org.fanjun.model.Teacher;
+
+import org.groept.cloudMigration.model.Teacher;
 
 public interface TeacherSevice {
 
